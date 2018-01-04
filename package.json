@@ -1,0 +1,13 @@
+{
+  "name": "takami",
+  "version": "1.0.0",
+  "description": "Web crawler for http://love-live.wikia.com",
+  "main": "index.js",
+  "scripts": {
+    "help": "node help.js",
+    "test": "node request_test.js",
+    "start" : "./start.sh"
+  },
+  "author": "iigmir",
+  "license": "ISC"
+}

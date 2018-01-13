@@ -1,21 +1,14 @@
-var request = require('request').defaults({jar: true});
-var cheerio = require('cheerio');
-var fs = require('fs');
+var basic_plugin = require("./basic_plugin.js");
+var lovelive_wiki = basic_plugin.lovelive_wiki;
+var request = basic_plugin.request;
+var cheerio = basic_plugin.cheerio;
+var fs = basic_plugin.fs;
 
 var source_list = require('./output/song_url.js');
 var songlist = source_list.songlist;
-
-var output = fs.createWriteStream("output/output_list.js");
+var output = fs.createWriteStream("./output/output_list.js");
 var ogglist = new Array();
 var collected_song = 0;
-
-var lovelive_wiki = {
-    method: 'GET',
-    url: "http://love-live.wikia.com/wiki/",
-    headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; Takami/1.0)"
-    }
-};
 
 if( songlist == undefined )
 {
@@ -38,15 +31,22 @@ else
             }
             console.log("Takami: Accessing " + collected_song + "th song: " + $("title").text() );
             var song = $("span.ogg_custom").html();
-            let music_url = song.match(/(https:\/\/vignette.wikia.nocookie.net\/love-live\/images)\/(.*)\/(.*)\/(.*).ogg\//g)[0];
-            output.write( "'" + music_url + "', \n" );
+            var music_url = song.match(/(https:\/\/vignette.wikia.nocookie.net\/love-live\/images)\/(.*)\/(.*)\/(.*).ogg\//g);
+
+            if (
+                music_url != null &&
+                music_url != undefined &&
+                isNaN(music_url.length)
+            )
+            {
+                output.write( "'" + music_url + "', \n" );
+            }
 
             if( collected_song == songlist.length )
             {   // last
+                debugger;
                 output.write( "];" );
                 output.end();
-                console.log(' ');
-                console.log('Takami: Song list created in output_list.js.');
             }
         });
     });

@@ -6,7 +6,7 @@
   "scripts": {
     "help": "node help.js",
     "test": "node request_test.js",
-    "start": "./start.sh"
+    "start": "node ./index.js"
   },
   "author": "iigmir",
   "license": "ISC",

@@ -6,8 +6,13 @@
   "scripts": {
     "help": "node help.js",
     "test": "node request_test.js",
-    "start" : "./start.sh"
+    "start": "./start.sh"
   },
   "author": "iigmir",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "jsdom": "^14.1.0",
+    "request": "^2.88.0"
+  }
 }

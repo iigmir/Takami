@@ -1,2 +1,5 @@
-console.log(123);
-// console.log("Takami is web crawler for http://love-live.wikia.com");
+const main = require("./get_song_url");
+
+main();
+
+// console.log(url_list);

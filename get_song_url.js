@@ -1,8 +1,7 @@
 const song_source = require("./song_source");
-const handle_files = require("./handle_files");
+const get_ogg_url = require("./get_ogg_url");
 const request = require("request");
 const jsdom = require("jsdom");
-const fs = require("fs");
 const { JSDOM } = jsdom;
 
 let all_list = [];
@@ -11,10 +10,12 @@ let flag = 0;
 function get_list(error, response, body)
 {
     if (error) { throw new Error(error); }
+    // DOM
     const { document } = (new JSDOM(body)).window;
     let new_urls = [
         ...document.querySelectorAll(".category-page__member a")
     ].map( u => u.href );
+    // Action
     all_list.push( ...new_urls );
     flag += 1;
     if( flag === song_source.length )

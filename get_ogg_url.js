@@ -1,5 +1,6 @@
 const request = require("request");
 const jsdom = require("jsdom");
+const fs = require("fs");
 const handle_files = require("./handle_files");
 const { JSDOM } = jsdom;
 

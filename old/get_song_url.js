@@ -1,5 +1,5 @@
-const song_source = require("./song_source");
-const get_ogg_url = require("./get_ogg_url");
+const song_source = require("../song_source");
+const get_ogg_url = require("../get_ogg_url");
 const request = require("request");
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;

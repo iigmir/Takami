@@ -24,8 +24,6 @@ function get_url(error, response, body)
     flag += 1;
     if( flag === all_list.length )
     {
-        console.log(song_list);
-        debugger;
         fs.writeFile(
             "./output/output_url.json",
             JSON.stringify({ song_list }),

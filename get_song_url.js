@@ -1,10 +1,12 @@
 const song_source = require("./song_source");
+const handle_files = require("./handle_files");
 const request = require("request");
 const jsdom = require("jsdom");
 const fs = require("fs");
 const { JSDOM } = jsdom;
 
 let all_list = [];
+let flag = 0;
 
 function get_list(error, response, body)
 {
@@ -14,7 +16,12 @@ function get_list(error, response, body)
         ...document.querySelectorAll(".category-page__member a")
     ].map( u => u.href );
     all_list.push( ...new_urls );
-    console.log( all_list.length );
+    flag += 1;
+    if( flag === song_source.length )
+    {
+        get_ogg_url( all_list );
+        // fs.writeFile( "./output/song_url.json", JSON.stringify({ all_list }), (err) => handle_files(err) );
+    }
     return;
 }
 
@@ -22,14 +29,6 @@ module.exports = function()
 {
     song_source.map( url =>
     {
-        request(
-            url,
-            (error, response, body) => get_list(error, response, body)
-        );
-        // fs.writeFile(
-        //     "./output/song_url.js",
-        //     text_render(body),
-        //     (err) => handle_files(err)
-        // );
+        request( url, (error, response, body) => get_list(error, response, body) );
     });
 }

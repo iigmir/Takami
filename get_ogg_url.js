@@ -1,6 +1,6 @@
 const request = require("request");
 const jsdom = require("jsdom");
-// const wgOggPlayer = require("./wgOggDump");
+const handle_files = require("./handle_files");
 const { JSDOM } = jsdom;
 
 let all_list = [];
@@ -17,7 +17,7 @@ function get_url(error, response, body)
     {
         ogg_player_http = ogg_player_1.innerHTML.match(/http.+(?=\/revision)/g);
         console.log( "Get song:" + ogg_player_http );
-        new_urls.push( ogg_player_http[0] );
+        song_list.push( ogg_player_http[0] );
     }
     // Action
     flag += 1;
@@ -26,7 +26,7 @@ function get_url(error, response, body)
         console.log(song_list);
         debugger;
         fs.writeFile(
-            "./output/song_url.json",
+            "./output/output_url.json",
             JSON.stringify({ song_list }),
             (err) => handle_files(err)
         );

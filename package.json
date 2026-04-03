@@ -11,8 +11,8 @@
   "author": "iigmir",
   "license": "ISC",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.12",
-    "jsdom": "^16.5.0",
-    "request": "^2.88.0"
+    "cheerio": "^1.2.0",
+    "jsdom": "^29.0.1",
+    "request": "^2.88.2"
   }
 }
